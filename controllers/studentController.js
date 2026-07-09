@@ -60,9 +60,42 @@ const getStudentById = (req, res) => {
   });
 };
 
+const showEditForm = (req, res) => {
+  const id = Number(req.params.id);
+
+  const student = students.find((student) => student.id === id);
+
+  if (!student) {
+    return res.status(404).send("Student not found");
+  }
+
+  res.render("students/edit", {
+    student,
+  });
+};
+
+const updateStudent = (req, res) => {
+  const id = Number(req.params.id);
+
+  const student = students.find((student) => student.id === id);
+
+  if (!student) {
+    return res.status(404).send("Student not found");
+  }
+
+  student.name = req.body.name;
+  student.email = req.body.email;
+  student.department = req.body.department;
+  student.level = req.body.level;
+
+  res.redirect(`/students/${id}`);
+};
+
 module.exports = {
   getAllStudents,
   showRegistrationForm,
   createStudent,
   getStudentById,
+  showEditForm,
+  updateStudent,
 };

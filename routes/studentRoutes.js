@@ -12,6 +12,9 @@ router.get("/new", studentController.showRegistrationForm);
 // Create a new student
 router.post("/", studentController.createStudent);
 
+router.get("/:id/edit", studentController.showEditForm);
+
+router.post("/:id/edit", studentController.updateStudent);
 // Display a single student
 router.get("/:id", studentController.getStudentById);
 
