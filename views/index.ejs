@@ -1,0 +1,49 @@
+<%- include("partials/header") %>
+
+<div class="text-center">
+
+    <h1 class="display-4 fw-bold">
+    Welcome to <%= university %>
+</h1>
+
+    <p class="lead mt-4">
+        Manage students, courses and lecturers from one platform.
+    </p>
+    <div class="row mt-5">
+
+    <div class="col-md-4">
+        <div class="card text-center shadow">
+            <div class="card-body">
+                <h2><%= totalStudents %></h2>
+                <p>Students</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card text-center shadow">
+            <div class="card-body">
+                <h2><%= totalCourses %></h2>
+                <p>Courses</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card text-center shadow">
+            <div class="card-body">
+                <h2><%= totalLecturers %></h2>
+                <p>Lecturers</p>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+    <a href="/students" class="btn btn-primary btn-lg mt-3">
+        View Students
+    </a>
+
+</div>
+
+<%- include("partials/footer") %>

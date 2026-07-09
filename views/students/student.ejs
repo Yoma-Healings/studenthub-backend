@@ -1,0 +1,53 @@
+<%- include("../partials/header") %>
+
+<h1 class="mb-4">Students</h1>
+
+<a href="#" class="btn btn-success mb-4">
+    + Add Student
+</a>
+
+<div class="row">
+
+    <% students.forEach(student => { %>
+
+        <div class="col-md-4 mb-4">
+
+            <div class="card shadow">
+
+                <div class="card-body">
+
+                    <h4><%= student.name %></h4>
+
+                    <p>
+                        <strong>Department:</strong>
+                        <%= student.department %>
+                    </p>
+
+                    <p>
+                        <strong>Level:</strong>
+                        <%= student.level %>
+                    </p>
+
+                    <a href="#" class="btn btn-primary btn-sm">
+                        View
+                    </a>
+
+                    <a href="#" class="btn btn-warning btn-sm">
+                        Edit
+                    </a>
+
+                    <a href="#" class="btn btn-danger btn-sm">
+                        Delete
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    <% }) %>
+
+</div>
+
+<%- include("../partials/footer") %>
