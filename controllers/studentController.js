@@ -1,4 +1,4 @@
-const students = [
+let students = [
   {
     id: 1,
     name: "Harrison",
@@ -91,6 +91,14 @@ const updateStudent = (req, res) => {
   res.redirect(`/students/${id}`);
 };
 
+const deleteStudent = (req, res) => {
+  const id = Number(req.params.id);
+
+  students = students.filter((student) => student.id !== id);
+
+  res.redirect("/students");
+};
+
 module.exports = {
   getAllStudents,
   showRegistrationForm,
@@ -98,4 +106,5 @@ module.exports = {
   getStudentById,
   showEditForm,
   updateStudent,
+  deleteStudent,
 };

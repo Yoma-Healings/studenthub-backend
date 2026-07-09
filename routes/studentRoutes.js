@@ -15,6 +15,8 @@ router.post("/", studentController.createStudent);
 router.get("/:id/edit", studentController.showEditForm);
 
 router.post("/:id/edit", studentController.updateStudent);
+
+router.get("/:id/delete", studentController.deleteStudent);
 // Display a single student
 router.get("/:id", studentController.getStudentById);
 

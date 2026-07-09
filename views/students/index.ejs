@@ -53,8 +53,10 @@
                             Edit
                         </a>
 
-                        <a href="/students/<%= student.id %>/delete" class="btn btn-danger btn-sm">
-                            Delete
+                        <a href="/students/<%= student.id %>/delete"
+                         class="btn btn-danger btn-sm"
+                            onclick="return confirm('Are you sure you want to delete this student?')">
+                             Delete
                         </a>
 
                     </div>
