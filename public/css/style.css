@@ -3,6 +3,7 @@
     -apple-system, BlinkMacSystemFont, "Avenir Next", Avenir, "Nimbus Sans L",
     Roboto, "Noto Sans", "Segoe UI", Arial, Helvetica, "Helvetica Neue",
     sans-serif;
+  --serif-font: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
   --mono-font: Consolas, Menlo, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
   --standard-border-radius: 5px;
   --border-width: 1px;
@@ -163,7 +164,7 @@ input[type="button"] {
   border: var(--border-width) solid var(--accent);
   background-color: var(--accent);
   color: var(--accent-text);
-  padding: 0.5rem 0.9rem;
+  padding: 0.5em;
   line-height: normal;
   text-decoration: none;
 }
@@ -237,6 +238,7 @@ header nav a:hover,
 header nav a.current,
 header nav a[aria-current="page"],
 header nav a[aria-current="true"] {
+  background: var(--bg);
   border-color: var(--accent);
   color: var(--accent);
   cursor: pointer;
@@ -247,6 +249,9 @@ header nav a[aria-current="true"] {
     padding: 0;
     line-height: 1;
     text-decoration: underline;
+  }
+  header nav a.current {
+    background: 0 0;
   }
 }
 aside,
@@ -312,7 +317,7 @@ details {
 }
 summary {
   cursor: pointer;
-  word-break: break-all;
+  word-break: break-word;
   margin: -0.7rem -1rem;
   padding: 0.7rem 1rem;
   font-weight: 700;
@@ -325,6 +330,9 @@ details[open] > summary {
 }
 details[open] > :last-child {
   margin-bottom: 0;
+}
+details h2:first-of-type {
+  margin-top: 0;
 }
 table {
   border-collapse: collapse;
@@ -461,7 +469,7 @@ mark {
   padding: 2px 5px;
 }
 mark a {
-  color: #0d47a1;
+  color: var(--accent);
 }
 img,
 video {
@@ -562,6 +570,9 @@ dialog::backdrop {
   background-color: var(--bg);
   opacity: 0.8;
 }
+dialog h2:first-of-type {
+  margin-top: 0;
+}
 @media only screen and (width<=720px) {
   dialog {
     max-width: calc(100vw - 2rem);
@@ -584,6 +595,12 @@ sub {
   border-radius: var(--standard-border-radius);
   margin: 2rem 0;
   padding: 1.5rem;
+}
+div.notice p:first-of-type {
+  margin-top: 0;
+}
+div.notice p:last-of-type {
+  margin-bottom: 0;
 }
 @media print {
   @page {
@@ -622,11 +639,7 @@ sub {
   mark {
     border: var(--border-width) solid var(--border);
   }
-  pre,
-  table,
-  figure,
-  img,
-  svg {
+  figure {
     break-inside: avoid;
   }
   pre code {

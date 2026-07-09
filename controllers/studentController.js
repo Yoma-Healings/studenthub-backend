@@ -46,8 +46,23 @@ const createStudent = (req, res) => {
   res.redirect("/students");
 };
 
+const getStudentById = (req, res) => {
+  const id = Number(req.params.id);
+
+  const student = students.find((student) => student.id === id);
+
+  if (!student) {
+    return res.status(404).send("Student not found");
+  }
+
+  res.render("students/show", {
+    student,
+  });
+};
+
 module.exports = {
   getAllStudents,
   showRegistrationForm,
   createStudent,
+  getStudentById,
 };

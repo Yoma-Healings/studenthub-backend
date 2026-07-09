@@ -1,0 +1,42 @@
+<%- include("../partials/header") %>
+
+<div class="container mt-4">
+
+    <div class="card shadow">
+
+        <div class="card-header bg-primary text-white">
+            <h2>Student Details</h2>
+        </div>
+
+        <div class="card-body">
+
+            <h3><%= student.name %></h3>
+
+            <hr>
+
+            <p>
+                <strong>Email:</strong>
+                <%= student.email %>
+            </p>
+
+            <p>
+                <strong>Department:</strong>
+                <%= student.department %>
+            </p>
+
+            <p>
+                <strong>Level:</strong>
+                <%= student.level %>
+            </p>
+
+            <a href="/students" class="btn btn-secondary">
+                ← Back to Students
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+<%- include("../partials/footer") %>

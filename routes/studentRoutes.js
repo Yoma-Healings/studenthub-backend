@@ -13,14 +13,6 @@ router.get("/new", studentController.showRegistrationForm);
 router.post("/", studentController.createStudent);
 
 // Display a single student
-router.get("/:id", (req, res) => {
-  const student = {
-    id: req.params.id,
-    name: "Harrison",
-    department: "Electrical Engineering",
-  };
-
-  res.json(student);
-});
+router.get("/:id", studentController.getStudentById);
 
 module.exports = router;
