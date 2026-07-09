@@ -1,15 +1,18 @@
-//import express
-const express = require('express');
-
-//initialize the router
+const express = require("express");
 const router = express.Router();
 
-//importing controller
-const studentController = require("../controllers/studentController")
+const studentController = require("../controllers/studentController");
 
-// home route
+// Display all students
 router.get("/", studentController.getAllStudents);
 
+// Display registration form
+router.get("/new", studentController.showRegistrationForm);
+
+// Create a new student
+router.post("/", studentController.createStudent);
+
+// Display a single student
 router.get("/:id", (req, res) => {
   const student = {
     id: req.params.id,
@@ -20,14 +23,4 @@ router.get("/:id", (req, res) => {
   res.json(student);
 });
 
-//post route
-router.post("/", (req, res) => {
-  res.json({
-    message: "Student registered successfully!",
-  });
-});
-
-
-
-//export the router
 module.exports = router;
