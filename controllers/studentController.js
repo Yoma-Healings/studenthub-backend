@@ -1,38 +1,23 @@
-let students = [
-  {
-    id: 1,
-    name: "Harrison",
-    email: "onigbaeminent@gmail.com",
-    department: "Electrical Engineering",
-    level: 400,
-  },
-  {
-    id: 2,
-    name: "John",
-    email: "john@example.com",
-    department: "Computer Science",
-    level: 300,
-  },
-  {
-    id: 3,
-    name: "Mary",
-    email: "mary@example.com",
-    department: "Mechanical Engineering",
-    level: 200,
-  },
-];
+const studentModel = require("../models/studentModel");
 
+// Get all students
 const getAllStudents = (req, res) => {
+  const students = studentModel.getAllStudents();
+
   res.render("students/index", {
     students,
   });
 };
 
+// Show registration form
 const showRegistrationForm = (req, res) => {
   res.render("students/new");
 };
 
+// Create a new student
 const createStudent = (req, res) => {
+  const students = studentModel.getAllStudents();
+
   const newStudent = {
     id: students.length + 1,
     name: req.body.name,
@@ -41,15 +26,16 @@ const createStudent = (req, res) => {
     level: req.body.level,
   };
 
-  students.push(newStudent);
+  studentModel.addStudent(newStudent);
 
   res.redirect("/students");
 };
 
+// Get one student
 const getStudentById = (req, res) => {
   const id = Number(req.params.id);
 
-  const student = students.find((student) => student.id === id);
+  const student = studentModel.getStudentById(id);
 
   if (!student) {
     return res.status(404).send("Student not found");
@@ -60,10 +46,11 @@ const getStudentById = (req, res) => {
   });
 };
 
+// Show edit form
 const showEditForm = (req, res) => {
   const id = Number(req.params.id);
 
-  const student = students.find((student) => student.id === id);
+  const student = studentModel.getStudentById(id);
 
   if (!student) {
     return res.status(404).send("Student not found");
@@ -74,27 +61,28 @@ const showEditForm = (req, res) => {
   });
 };
 
+// Update student
 const updateStudent = (req, res) => {
   const id = Number(req.params.id);
 
-  const student = students.find((student) => student.id === id);
+  const updated = studentModel.updateStudent(id, req.body);
 
-  if (!student) {
+  if (!updated) {
     return res.status(404).send("Student not found");
   }
-
-  student.name = req.body.name;
-  student.email = req.body.email;
-  student.department = req.body.department;
-  student.level = req.body.level;
 
   res.redirect(`/students/${id}`);
 };
 
+// Delete student
 const deleteStudent = (req, res) => {
   const id = Number(req.params.id);
 
-  students = students.filter((student) => student.id !== id);
+  const deleted = studentModel.deleteStudent(id);
+
+  if (!deleted) {
+    return res.status(404).send("Student not found");
+  }
 
   res.redirect("/students");
 };
