@@ -1,60 +1,57 @@
-let students = [
-  {
-    id: 1,
-    name: "Harrison",
-    email: "onigbaeminent@gmail.com",
-    department: "Electrical Engineering",
-    level: 400,
-  },
-  {
-    id: 2,
-    name: "John",
-    email: "john@example.com",
-    department: "Computer Science",
-    level: 300,
-  },
-  {
-    id: 3,
-    name: "Mary",
-    email: "mary@example.com",
-    department: "Mechanical Engineering",
-    level: 200,
-  },
-];
+const db = require("../config/database");
 
+// Get all students
 const getAllStudents = () => {
-  return students;
+  const stmt = db.prepare("SELECT * FROM students ORDER BY id");
+  return stmt.all();
 };
 
+// Get one student
 const getStudentById = (id) => {
-  return students.find((student) => student.id === id);
+  const stmt = db.prepare("SELECT * FROM students WHERE id = ?");
+  return stmt.get(id);
 };
 
+// Add student
 const addStudent = (student) => {
-  students.push(student);
+  const stmt = db.prepare(`
+        INSERT INTO students (name, email, department, level)
+        VALUES (?, ?, ?, ?)
+    `);
+
+  return stmt.run(
+    student.name,
+    student.email,
+    student.department,
+    student.level,
+  );
 };
 
-const updateStudent = (id, updatedStudent) => {
-  const student = students.find((student) => student.id === id);
+// Update student
+const updateStudent = (id, student) => {
+  const stmt = db.prepare(`
+        UPDATE students
+        SET
+            name = ?,
+            email = ?,
+            department = ?,
+            level = ?
+        WHERE id = ?
+    `);
 
-  if (!student) return null;
-
-  student.name = updatedStudent.name;
-  student.email = updatedStudent.email;
-  student.department = updatedStudent.department;
-  student.level = updatedStudent.level;
-
-  return student;
+  return stmt.run(
+    student.name,
+    student.email,
+    student.department,
+    student.level,
+    id,
+  );
 };
 
+// Delete student
 const deleteStudent = (id) => {
-  const index = students.findIndex((student) => student.id === id);
-
-  if (index === -1) return false;
-
-  students.splice(index, 1);
-
-  return true;
+  const stmt = db.prepare("DELETE FROM students WHERE id = ?");
+  return stmt.run(id);
 };
 
 module.exports = {

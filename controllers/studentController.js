@@ -16,10 +16,7 @@ const showRegistrationForm = (req, res) => {
 
 // Create a new student
 const createStudent = (req, res) => {
-  const students = studentModel.getAllStudents();
-
   const newStudent = {
-    id: students.length + 1,
     name: req.body.name,
     email: req.body.email,
     department: req.body.department,
@@ -67,7 +64,7 @@ const updateStudent = (req, res) => {
 
   const updated = studentModel.updateStudent(id, req.body);
 
-  if (!updated) {
+  if (!updated.changes) {
     return res.status(404).send("Student not found");
   }
 
@@ -80,7 +77,7 @@ const deleteStudent = (req, res) => {
 
   const deleted = studentModel.deleteStudent(id);
 
-  if (!deleted) {
+  if (!deleted.changes) {
     return res.status(404).send("Student not found");
   }
 
