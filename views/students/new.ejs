@@ -2,28 +2,67 @@
 
 <h1 class="mb-4">Register Student</h1>
 
+<!-- Validation Errors -->
+<% if (errors && errors.length > 0) { %>
+  <div class="alert alert-danger">
+    <ul class="mb-0">
+      <% errors.forEach(error => { %>
+        <li><%= error %></li>
+      <% }) %>
+    </ul>
+  </div>
+<% } %>
+
 <form action="/students" method="POST">
+
   <div class="mb-3">
     <label class="form-label">Full Name</label>
-    <input type="text" class="form-control" name="name" required />
+    <input
+      type="text"
+      class="form-control"
+      name="name"
+      value="<%= student.name || '' %>"
+    />
   </div>
 
   <div class="mb-3">
     <label class="form-label">Email</label>
-    <input type="email" class="form-control" name="email" required />
+    <input
+      type="email"
+      class="form-control"
+      name="email"
+      value="<%= student.email || '' %>"
+    />
   </div>
 
   <div class="mb-3">
     <label class="form-label">Department</label>
-    <input type="text" class="form-control" name="department" required />
+    <input
+      type="text"
+      class="form-control"
+      name="department"
+      value="<%= student.department || '' %>"
+    />
   </div>
 
   <div class="mb-3">
     <label class="form-label">Level</label>
-    <input type="number" class="form-control" name="level" required />
+    <input
+      type="number"
+      class="form-control"
+      name="level"
+      value="<%= student.level || '' %>"
+    />
   </div>
 
-  <button class="btn btn-success">Register Student</button>
+  <button type="submit" class="btn btn-success">
+    Register Student
+  </button>
+
+  <a href="/students" class="btn btn-secondary">
+    Cancel
+  </a>
+
 </form>
 
 <%- include("../partials/footer") %>

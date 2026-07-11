@@ -6,10 +6,16 @@ const getAllStudents = () => {
   return stmt.all();
 };
 
-// Get one student
+// Get one student by ID
 const getStudentById = (id) => {
   const stmt = db.prepare("SELECT * FROM students WHERE id = ?");
   return stmt.get(id);
+};
+
+// Get one student by Email
+const getStudentByEmail = (email) => {
+  const stmt = db.prepare("SELECT * FROM students WHERE email = ?");
+  return stmt.get(email);
 };
 
 // Add student
@@ -23,7 +29,7 @@ const addStudent = (student) => {
     student.name,
     student.email,
     student.department,
-    student.level,
+    student.level
   );
 };
 
@@ -44,7 +50,7 @@ const updateStudent = (id, student) => {
     student.email,
     student.department,
     student.level,
-    id,
+    id
   );
 };
 
@@ -57,6 +63,7 @@ const deleteStudent = (id) => {
 module.exports = {
   getAllStudents,
   getStudentById,
+  getStudentByEmail,
   addStudent,
   updateStudent,
   deleteStudent,
